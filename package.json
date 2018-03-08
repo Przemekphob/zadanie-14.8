@@ -1,0 +1,47 @@
+{
+   "name": "Project3-golden",
+   "version": "1.0.0",
+   "description": "http://przemekphob.github.io/Project/",
+   "main": "index.js",
+   "scripts": {
+      "start": "http-server",
+      "test": "npm-run-all test:*",
+      "test:js": "globstar jshint js/*.js",
+      "init-project": "npm-run-all init:*",
+      "init:dirs": "mkdirp sass css vendor images js",
+      "init:files": "touch README.md index.html sass/style.scss js/scripts.js",
+      "init:gitignore": "curl https://raw.githubusercontent.com/github/gitignore/master/Node.gitignore -o .gitignore",
+      "init:npm-install": "npm install",
+      "build": "npm-run-all build:* test",
+      "build:clean": "rimraf css",
+      "build:sass": "node-sass --output-style compact -o css sass",
+      "build:autoprefixer": "autoprefixer-cli css/style.css",
+      "build-dev:sass": "node-sass --output-style expanded --source-map true -o css sass",
+      "watch": "onchange -d 100 sass/**/* -- npm-run-all build -p watch:*",
+      "watch:01-sass": "node-sass --output-style expanded --source-map true -o css sass",
+      "watch:02-autoprefixer": "autoprefixer-cli -o css/style.prefixed.css css/style.css",
+      "browsersync": "browser-sync start --server --files css/*.css *.html"
+   },
+   "repository": {
+      "type": "git",
+      "url": "git+https://github.com/Przemekphob/Project.git"
+   },
+   "keywords": [],
+   "author": "",
+   "license": "ISC",
+   "bugs": {
+      "url": "https://github.com/Przemekphob/Project/issues"
+   },
+   "homepage": "https://github.com/Przemekphob/Project#readme",
+   "devDependencies": {
+      "autoprefixer-cli": "^1.0.0",
+      "browser-sync": "^2.23.5",
+      "globstar": "^1.0.0",
+      "http-server": "^0.11.1",
+      "jshint": "^2.9.5",
+      "node-sass": "^4.7.2",
+      "npm-run-all": "^4.1.2",
+      "rimraf": "^2.6.2"
+   },
+   "dependencies": {}
+}
