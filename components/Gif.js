@@ -8,6 +8,8 @@ Gif = React.createClass({
     getUrl: function() {
         return this.props.sourceUrl || GIPHY_LOADING_URL;
     },
+
+    
     render: function() {
         var url = this.props.loading ? GIPHY_LOADING_URL : this.props.url;
 
