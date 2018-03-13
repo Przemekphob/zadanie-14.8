@@ -23,30 +23,34 @@ App = React.createClass({
             .catch(error => console.log('Error', error));
     },
 
-    getGif: function(searchingText) {  
+    getGif: function(searchingText) {
         var GIPHY_PUB_KEY = 'vL0XZUL2TlbhD3wH2W27UOWvAkT4xIX5';
         var GIPHY_API_URL = 'https://api.giphy.com';
-        var url = GIPHY_API_URL + '/v1/gifs/random?api_key=' + GIPHY_PUB_KEY + '&tag=' + searchingText;  
-
-        return new Promise (
+        var url = GIPHY_API_URL + '/v1/gifs/random?api_key=' + GIPHY_PUB_KEY + '&tag=' + searchingText;
+        
+       return new Promise(
             function(resolve, reject) {
                 var request = new XMLHttpRequest();
-                request.onload = function () {
+                request.onload = function() {
                     if (this.status === 200) {
-                        resolve(gif); 
+                        var data = JSON.parse(request.responseText).data;
+                        var gif = {
+                            url: data.fixed_width_downsampled_url,
+                            sourceUrl: data.url
+                        }
+                        resolve(gif);
                     } else {
                         reject(new Error(this.statusText));
                     }
                 };
-                request.onerror = function () {
+                request.onerror = function() {
                     reject(new Error(
-                       `XMLHttpRequest Error: ${this.statusText}`));
+                        `XMLHttpRequest Error: ${this.statusText}`));
                 };
                 request.open('GET', url);
                 request.send();
-            }
-        );
-    },  
+            });
+    },
     
     render: function() {
 
