@@ -35,6 +35,7 @@
    "homepage": "https://github.com/Przemekphob/Project#readme",
    "devDependencies": {
       "autoprefixer-cli": "^1.0.0",
+      "babel-polyfill": "^6.26.0",
       "browser-sync": "^2.23.5",
       "globstar": "^1.0.0",
       "http-server": "^0.11.1",
